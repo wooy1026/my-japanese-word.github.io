@@ -19,6 +19,7 @@
     --peach-deep: #F5B990;
     --ink: #4B4459;
     --ink-soft: #8A8098;
+    --ink-faint: #B3A9BE;
     --line: #E7DFF5;
     --shadow: 0 20px 40px -20px rgba(107, 87, 145, 0.35);
   }
@@ -26,8 +27,7 @@
   *{ box-sizing: border-box; }
 
   body{
-    margin:0;
-    min-height:100vh;
+    margin:0; min-height:100vh;
     background:
       radial-gradient(circle at 12% 8%, var(--mint) 0%, transparent 32%),
       radial-gradient(circle at 90% 12%, var(--peach) 0%, transparent 30%),
@@ -35,117 +35,67 @@
       var(--bg);
     font-family: 'Noto Sans KR', sans-serif;
     color: var(--ink);
-    display:flex;
-    flex-direction:column;
-    align-items:center;
+    display:flex; flex-direction:column; align-items:center;
     padding: 48px 20px 80px;
   }
 
-  .eyebrow{
-    font-size: 13px;
-    letter-spacing: 0.18em;
-    color: var(--lavender-deep);
-    font-weight: 700;
-    margin-bottom: 10px;
-    text-transform: uppercase;
-  }
-
-  h1{
-    font-family: 'Zen Maru Gothic', sans-serif;
-    font-size: 32px;
-    font-weight: 700;
-    margin: 0 0 6px;
-    color: var(--ink);
-  }
-
+  .eyebrow{ font-size: 13px; letter-spacing: 0.18em; color: var(--lavender-deep); font-weight: 700; margin-bottom: 10px; text-transform: uppercase; }
+  h1{ font-family: 'Zen Maru Gothic', sans-serif; font-size: 32px; font-weight: 700; margin: 0 0 6px; color: var(--ink); }
   .date{ font-size: 14px; color: var(--ink-soft); margin-bottom: 10px; }
-  .status{ font-size: 12px; color: var(--lavender-deep); margin-bottom: 26px; min-height: 16px; }
+  .status{ font-size: 12px; color: var(--lavender-deep); margin-bottom: 18px; min-height: 16px; }
+
+  .tabs{ display:flex; gap: 8px; background: var(--bg-2); padding: 4px; border-radius: 999px; margin-bottom: 30px; }
+  .tab{ font-size: 13px; font-weight: 700; padding: 9px 18px; border-radius: 999px; cursor:pointer; color: var(--ink-soft); user-select:none; }
+  .tab.active{ background: var(--card); color: var(--ink); box-shadow: 0 6px 14px -8px rgba(107,87,145,0.5); }
 
   .stage{ width: 100%; max-width: 420px; perspective: 1600px; }
 
-  .card{
-    position: relative;
-    width: 100%;
-    aspect-ratio: 3 / 4;
-    cursor: pointer;
-    transform-style: preserve-3d;
-    transition: transform 0.6s cubic-bezier(.4,.2,.2,1);
-  }
+  .nav-row{ display:flex; align-items:center; justify-content:space-between; width:100%; max-width:420px; margin-bottom:12px; }
+  .nav-btn{ background: var(--card); border: 1px solid var(--line); width: 34px; height: 34px; border-radius: 50%; display:flex; align-items:center; justify-content:center; cursor:pointer; font-weight:700; color: var(--ink); }
+  .nav-btn:active{ transform: scale(0.94); }
+  .nav-label{ font-size: 13px; font-weight: 700; color: var(--ink-soft); }
+
+  .card{ position: relative; width: 100%; aspect-ratio: 3 / 4; cursor: pointer; transform-style: preserve-3d; transition: transform 0.6s cubic-bezier(.4,.2,.2,1); }
   .card.flipped{ transform: rotateY(180deg); }
 
-  .face{
-    position:absolute; inset:0;
-    backface-visibility: hidden;
-    border-radius: 28px;
-    background: var(--card);
-    box-shadow: var(--shadow);
-    border: 1px solid var(--line);
-    display:flex; flex-direction:column; align-items:center; justify-content:center;
-    padding: 32px 28px; text-align:center; overflow:hidden;
-  }
-
-  .ring{ position:absolute; top: 16px; width: 14px; height:14px; border-radius:50%;
-    background: var(--bg-2); box-shadow: inset 0 2px 4px rgba(107,87,145,0.25); }
+  .face{ position:absolute; inset:0; backface-visibility: hidden; border-radius: 28px; background: var(--card); box-shadow: var(--shadow); border: 1px solid var(--line); display:flex; flex-direction:column; align-items:center; justify-content:center; padding: 32px 28px; text-align:center; overflow:hidden; }
+  .ring{ position:absolute; top: 16px; width: 14px; height:14px; border-radius:50%; background: var(--bg-2); box-shadow: inset 0 2px 4px rgba(107,87,145,0.25); }
   .ring.left{ left: 40px; } .ring.right{ right: 40px; }
-
   .back{ transform: rotateY(180deg); background: linear-gradient(160deg, #ffffff, var(--bg-2)); }
 
-  .pos-pill{
-    display:inline-block; font-size: 12px; font-weight: 700; padding: 5px 14px;
-    border-radius: 999px; background: var(--mint); color: #2E6650; margin-bottom: 22px; letter-spacing: 0.02em;
-  }
+  .pos-pill{ display:inline-block; font-size: 12px; font-weight: 700; padding: 5px 14px; border-radius: 999px; background: var(--mint); color: #2E6650; margin-bottom: 22px; letter-spacing: 0.02em; }
   .pos-pill.verb{ background: var(--peach); color: #8A4B1E; }
   .pos-pill.adj{ background: var(--lavender); color: #4C3A78; }
 
-  .word-main{
-    font-family: 'Zen Maru Gothic', sans-serif;
-    font-size: 50px; font-weight: 700; line-height: 1.25; margin-bottom: 14px; word-break: keep-all;
-  }
+  .word-main{ font-family: 'Zen Maru Gothic', sans-serif; font-size: 50px; font-weight: 700; line-height: 1.25; margin-bottom: 10px; word-break: keep-all; }
   .romaji{ font-size: 15px; color: var(--ink-soft); letter-spacing: 0.04em; margin-bottom: 28px; }
   .hint{ font-size: 13px; color: var(--lavender-deep); font-weight: 500; }
 
-  .level-tag{
-    position:absolute; top: 46px; right: 22px; font-size: 11px; font-weight: 700;
-    color: var(--peach-deep); background: #FFF3E9; padding: 4px 10px; border-radius: 999px; border: 1px solid #FBDFC6;
-  }
+  .level-tag{ position:absolute; top: 46px; right: 22px; font-size: 11px; font-weight: 700; color: var(--peach-deep); background: #FFF3E9; padding: 4px 10px; border-radius: 999px; border: 1px solid #FBDFC6; }
 
-  .kana{ font-family: 'Zen Maru Gothic', sans-serif; font-size: 22px; color: var(--lavender-deep); margin-bottom: 10px; }
-  .meaning{ font-size: 22px; font-weight: 700; margin-bottom: 18px; word-break: keep-all; }
+  .kana-row{ display:flex; align-items:baseline; gap:8px; margin-bottom: 16px; }
+  .kana{ font-family: 'Zen Maru Gothic', sans-serif; font-size: 22px; color: var(--lavender-deep); }
+  .kana-romaji{ font-size: 12px; color: var(--ink-faint); letter-spacing: 0.03em; }
+
+  .meaning-ko{ font-size: 22px; font-weight: 700; margin-bottom: 4px; word-break: keep-all; }
+  .meaning-en{ font-size: 12px; color: var(--ink-faint); margin-bottom: 18px; }
 
   .example{ background: var(--bg); border-radius: 16px; padding: 16px 18px; font-size: 14px; line-height: 1.65; width: 100%; }
   .example .jp{ font-family: 'Zen Maru Gothic', sans-serif; font-weight: 500; margin-bottom: 6px; color: var(--ink); }
   .example .kr{ color: var(--ink-soft); }
 
-  .source-note{
-    font-size: 12px; color: var(--ink-soft); background: var(--bg);
-    border-radius: 16px; padding: 14px 16px; width: 100%; line-height: 1.6;
-  }
-
   .controls{ display:flex; gap: 12px; margin-top: 26px; width: 100%; max-width: 420px; }
-
-  button{
-    font-family: 'Noto Sans KR', sans-serif; border: none; cursor:pointer; border-radius: 14px;
-    padding: 14px 18px; font-size: 14px; font-weight: 700;
-    transition: transform 0.15s ease, box-shadow 0.15s ease;
-  }
+  button{ font-family: 'Noto Sans KR', sans-serif; border: none; cursor:pointer; border-radius: 14px; padding: 14px 18px; font-size: 14px; font-weight: 700; transition: transform 0.15s ease, box-shadow 0.15s ease; }
   button:active{ transform: scale(0.97); }
-
   .btn-flip{ flex: 1; background: var(--card); color: var(--ink); border: 1px solid var(--line); }
   .btn-flip:hover{ box-shadow: 0 8px 20px -10px rgba(107,87,145,0.4); }
-
-  .btn-check{
-    flex: 1.4; background: linear-gradient(135deg, var(--mint-deep), var(--mint));
-    color: #1E4335; box-shadow: 0 12px 24px -12px rgba(143,205,180,0.9);
-  }
+  .btn-check{ flex: 1.4; background: linear-gradient(135deg, var(--mint-deep), var(--mint)); color: #1E4335; box-shadow: 0 12px 24px -12px rgba(143,205,180,0.9); }
   .btn-check.done{ background: linear-gradient(135deg, #E4DBFA, var(--lavender)); color: #4C3A78; }
 
   .levels{ margin-top: 40px; width: 100%; max-width: 420px; }
   .levels-title{ font-size: 13px; font-weight: 700; color: var(--ink-soft); margin-bottom: 12px; }
   .chips{ display:flex; gap: 8px; flex-wrap: wrap; }
-  .chip{
-    font-size: 13px; font-weight: 700; padding: 9px 16px; border-radius: 999px;
-    background: var(--card); border: 1px solid var(--line); color: var(--ink-soft); cursor: pointer; user-select: none;
-  }
+  .chip{ font-size: 13px; font-weight: 700; padding: 9px 16px; border-radius: 999px; background: var(--card); border: 1px solid var(--line); color: var(--ink-soft); cursor: pointer; user-select: none; }
   .chip.active{ background: linear-gradient(135deg, var(--lavender-deep), var(--lavender)); color: #fff; border-color: transparent; }
   .pool-count{ font-size: 12px; color: var(--ink-soft); margin-top: 10px; }
 
@@ -159,7 +109,26 @@
   .dot.today{ box-shadow: 0 0 0 2px var(--lavender-deep); }
   .dot-label{ font-size: 10px; color: var(--ink-soft); }
 
-  footer{ margin-top: 50px; font-size: 12px; color: var(--ink-soft); text-align:center; max-width: 420px; line-height:1.6; }
+  /* 복습 페이지 */
+  .review-wrap{ width: 100%; max-width: 720px; }
+  .review-head{ display:flex; justify-content:space-between; align-items:baseline; margin-bottom: 18px; }
+  .review-head h2{ font-family:'Zen Maru Gothic', sans-serif; font-size: 18px; margin:0; }
+  .review-head span{ font-size: 12px; color: var(--ink-soft); }
+  .review-grid{ display:grid; grid-template-columns: repeat(auto-fill, minmax(130px, 1fr)); gap: 12px; }
+  .mini-card{ position:relative; aspect-ratio: 3/4; cursor:pointer; perspective: 1000px; }
+  .mini-inner{ position:relative; width:100%; height:100%; transform-style:preserve-3d; transition: transform 0.5s ease; }
+  .mini-card.flipped .mini-inner{ transform: rotateY(180deg); }
+  .mini-face{ position:absolute; inset:0; backface-visibility:hidden; border-radius:16px; background:var(--card); border:1px solid var(--line); display:flex; flex-direction:column; align-items:center; justify-content:center; padding:10px; text-align:center; box-shadow: 0 10px 20px -14px rgba(107,87,145,0.4); }
+  .mini-face.mback{ transform: rotateY(180deg); background: linear-gradient(160deg, #ffffff, var(--bg-2)); }
+  .mini-word{ font-family:'Zen Maru Gothic', sans-serif; font-size: 22px; font-weight:700; margin-bottom:4px; word-break:keep-all; }
+  .mini-tag{ position:absolute; top:6px; right:8px; font-size:9px; font-weight:700; color: var(--peach-deep); }
+  .mini-kana{ font-size:12px; color: var(--lavender-deep); margin-bottom:2px; }
+  .mini-romaji{ font-size:9px; color: var(--ink-faint); margin-bottom:8px; }
+  .mini-meaning-ko{ font-size:13px; font-weight:700; word-break:keep-all; }
+  .mini-meaning-en{ font-size:10px; color: var(--ink-faint); }
+  .review-empty{ font-size: 13px; color: var(--ink-soft); text-align:center; padding: 40px 0; }
+
+  footer{ margin-top: 50px; font-size: 12px; color: var(--ink-soft); text-align:center; max-width: 480px; line-height:1.7; }
   footer a{ color: var(--lavender-deep); }
 
   @media (max-width: 420px){ .word-main{ font-size: 40px; } h1{ font-size: 26px; } }
@@ -167,57 +136,84 @@
 </head>
 <body>
 
-  <div class="eyebrow">一日一語 · 하루 한 단어</div>
+  <div class="eyebrow">一日一語 · 하루 세 단어</div>
   <h1>오늘의 일본어 단어</h1>
   <div class="date" id="dateLabel"></div>
   <div class="status" id="statusLabel">단어 데이터 불러오는 중...</div>
 
-  <div class="stage">
-    <div class="card" id="card">
-      <div class="face front">
-        <div class="ring left"></div>
-        <div class="ring right"></div>
-        <span class="pos-pill" id="posPillFront">단어</span>
-        <div class="word-main" id="wordMain">…</div>
-        <div class="romaji" id="romaji"></div>
-        <div class="hint">카드를 눌러 뜻을 확인하세요</div>
-      </div>
-      <div class="face back">
-        <div class="level-tag" id="levelTag">N5</div>
-        <div class="kana" id="kana"></div>
-        <div class="meaning" id="meaning"></div>
-        <div class="example" id="exampleBox" style="display:none;">
-          <div class="jp" id="exJp"></div>
-          <div class="kr" id="exKr"></div>
+  <div class="tabs">
+    <div class="tab active" id="tabToday">오늘의 단어</div>
+    <div class="tab" id="tabReview">지금까지 배운 단어</div>
+  </div>
+
+  <!-- 오늘의 단어 뷰 -->
+  <div id="todayView">
+    <div class="nav-row">
+      <div class="nav-btn" id="prevBtn">‹</div>
+      <div class="nav-label" id="navLabel">1 / 3</div>
+      <div class="nav-btn" id="nextBtn">›</div>
+    </div>
+
+    <div class="stage">
+      <div class="card" id="card">
+        <div class="face front">
+          <div class="ring left"></div>
+          <div class="ring right"></div>
+          <span class="pos-pill" id="posPillFront">단어</span>
+          <div class="word-main" id="wordMain">…</div>
+          <div class="romaji" id="romaji"></div>
+          <div class="hint">카드를 눌러 뜻을 확인하세요</div>
         </div>
-        <div class="source-note" id="sourceNote" style="display:none;"></div>
+        <div class="face back">
+          <div class="level-tag" id="levelTag">N5</div>
+          <div class="kana-row">
+            <div class="kana" id="kana"></div>
+            <div class="kana-romaji" id="kanaRomaji"></div>
+          </div>
+          <div class="meaning-ko" id="meaningKo"></div>
+          <div class="meaning-en" id="meaningEn"></div>
+          <div class="example" id="exampleBox" style="display:none;">
+            <div class="jp" id="exJp"></div>
+            <div class="kr" id="exKr"></div>
+          </div>
+        </div>
       </div>
     </div>
-  </div>
 
-  <div class="controls">
-    <button class="btn-flip" id="flipBtn">카드 뒤집기</button>
-    <button class="btn-check" id="checkBtn">오늘 학습 완료</button>
-  </div>
-
-  <div class="levels">
-    <div class="levels-title">단어 범위 (JLPT 급수 선택)</div>
-    <div class="chips" id="chips"></div>
-    <div class="pool-count" id="poolCount"></div>
-  </div>
-
-  <div class="streak">
-    <div class="streak-title">
-      <span>최근 7일 학습 기록</span>
-      <span class="streak-count" id="streakCount">0일 완료</span>
+    <div class="controls">
+      <button class="btn-flip" id="flipBtn">카드 뒤집기</button>
+      <button class="btn-check" id="checkBtn">오늘 학습 완료</button>
     </div>
-    <div class="dots" id="dots"></div>
+
+    <div class="levels">
+      <div class="levels-title">단어 범위 (JLPT 급수 선택)</div>
+      <div class="chips" id="chips"></div>
+      <div class="pool-count" id="poolCount"></div>
+    </div>
+
+    <div class="streak">
+      <div class="streak-title">
+        <span>최근 7일 학습 기록</span>
+        <span class="streak-count" id="streakCount">0일 완료</span>
+      </div>
+      <div class="dots" id="dots"></div>
+    </div>
+  </div>
+
+  <!-- 복습 뷰 -->
+  <div id="reviewView" class="review-wrap" style="display:none;">
+    <div class="review-head">
+      <h2>지금까지 배운 단어</h2>
+      <span id="reviewCount"></span>
+    </div>
+    <div class="review-grid" id="reviewGrid"></div>
   </div>
 
   <footer>
-    단어는 매일 자정 기준으로 바뀌며, 선택한 급수의 전체 단어 풀을 순환합니다.<br>
+    단어는 매일 자정 기준으로 바뀌며, 선택한 급수의 전체 단어 풀에서 하루 3개씩 순환합니다.<br>
     확장 단어 데이터 출처: <a href="https://github.com/jamsinclair/open-anki-jlpt-decks" target="_blank" rel="noopener">open-anki-jlpt-decks</a>
-    (원본: tanos.co.uk, CC BY) · 기본 80단어는 직접 제작한 한국어 세트입니다.
+    (원본: tanos.co.uk, CC BY) · 한글 뜻은 자동 번역(MyMemory)을 거친 것으로 오역이 있을 수 있습니다.<br>
+    공개 JLPT 단어 데이터셋에서 가져온 단어는 뜻이 영어 사전 기준이며, 한글 뜻은 자동 번역된 것입니다.
   </footer>
 
 <script>
@@ -232,95 +228,141 @@ const storageAPI = (typeof window.storage !== 'undefined') ? window.storage : {
   delete: async (k) => { localStorage.removeItem(k); return { key: k, deleted: true }; }
 };
 
-/* ---------- 기본 내장 단어 (한국어 뜻 포함, 오프라인 폴백 겸 기본 세트) ---------- */
-const CURATED = [
-  {k:"水", r:"みず", ro:"mizu", m:"물", p:"명사", l:"N5", e:"水を飲みます。", em:"물을 마십니다."},
-  {k:"火", r:"ひ", ro:"hi", m:"불", p:"명사", l:"N5", e:"火に気をつけてください。", em:"불을 조심하세요."},
-  {k:"山", r:"やま", ro:"yama", m:"산", p:"명사", l:"N5", e:"週末に山に登ります。", em:"주말에 산에 오릅니다."},
-  {k:"川", r:"かわ", ro:"kawa", m:"강", p:"명사", l:"N5", e:"川で魚を釣りました。", em:"강에서 물고기를 잡았습니다."},
-  {k:"空", r:"そら", ro:"sora", m:"하늘", p:"명사", l:"N5", e:"今日は空がきれいです。", em:"오늘은 하늘이 예쁩니다."},
-  {k:"海", r:"うみ", ro:"umi", m:"바다", p:"명사", l:"N5", e:"夏は海に行きたいです。", em:"여름에는 바다에 가고 싶습니다."},
-  {k:"花", r:"はな", ro:"hana", m:"꽃", p:"명사", l:"N5", e:"庭に花を植えました。", em:"정원에 꽃을 심었습니다."},
-  {k:"木", r:"き", ro:"ki", m:"나무", p:"명사", l:"N5", e:"公園に大きい木があります。", em:"공원에 큰 나무가 있습니다."},
-  {k:"犬", r:"いぬ", ro:"inu", m:"개", p:"명사", l:"N5", e:"私の犬は白いです。", em:"제 개는 하얗습니다."},
-  {k:"猫", r:"ねこ", ro:"neko", m:"고양이", p:"명사", l:"N5", e:"猫が窓の下で寝ています。", em:"고양이가 창가에서 자고 있습니다."},
-  {k:"鳥", r:"とり", ro:"tori", m:"새", p:"명사", l:"N5", e:"朝、鳥の声が聞こえます。", em:"아침에 새 소리가 들립니다."},
-  {k:"魚", r:"さかな", ro:"sakana", m:"물고기", p:"명사", l:"N5", e:"夕食に魚を食べました。", em:"저녁으로 생선을 먹었습니다."},
-  {k:"雨", r:"あめ", ro:"ame", m:"비", p:"명사", l:"N5", e:"明日は雨が降るそうです。", em:"내일은 비가 온다고 합니다."},
-  {k:"雪", r:"ゆき", ro:"yuki", m:"눈", p:"명사", l:"N5", e:"今年は雪がたくさん降りました。", em:"올해는 눈이 많이 내렸습니다."},
-  {k:"風", r:"かぜ", ro:"kaze", m:"바람", p:"명사", l:"N5", e:"今日は風が強いです。", em:"오늘은 바람이 강합니다."},
-  {k:"朝", r:"あさ", ro:"asa", m:"아침", p:"명사", l:"N5", e:"毎朝六時に起きます。", em:"매일 아침 6시에 일어납니다."},
-  {k:"昼", r:"ひる", ro:"hiru", m:"낮", p:"명사", l:"N5", e:"昼に友達と会います。", em:"낮에 친구와 만납니다."},
-  {k:"夜", r:"よる", ro:"yoru", m:"밤", p:"명사", l:"N5", e:"夜は静かに勉強します。", em:"밤에는 조용히 공부합니다."},
-  {k:"今日", r:"きょう", ro:"kyō", m:"오늘", p:"명사", l:"N5", e:"今日はいい天気です。", em:"오늘은 날씨가 좋습니다."},
-  {k:"明日", r:"あした", ro:"ashita", m:"내일", p:"명사", l:"N5", e:"明日、テストがあります。", em:"내일 시험이 있습니다."},
-  {k:"昨日", r:"きのう", ro:"kinō", m:"어제", p:"명사", l:"N5", e:"昨日は忙しかったです。", em:"어제는 바빴습니다."},
-  {k:"友達", r:"ともだち", ro:"tomodachi", m:"친구", p:"명사", l:"N5", e:"友達と映画を見ました。", em:"친구와 영화를 봤습니다."},
-  {k:"家族", r:"かぞく", ro:"kazoku", m:"가족", p:"명사", l:"N5", e:"家族と旅行に行きます。", em:"가족과 여행을 갑니다."},
-  {k:"先生", r:"せんせい", ro:"sensei", m:"선생님", p:"명사", l:"N5", e:"先生に質問しました。", em:"선생님께 질문했습니다."},
-  {k:"学生", r:"がくせい", ro:"gakusei", m:"학생", p:"명사", l:"N5", e:"私は大学の学生です。", em:"저는 대학교 학생입니다."},
-  {k:"会社", r:"かいしゃ", ro:"kaisha", m:"회사", p:"명사", l:"N5", e:"毎日会社に行きます。", em:"매일 회사에 갑니다."},
-  {k:"仕事", r:"しごと", ro:"shigoto", m:"일, 직업", p:"명사", l:"N5", e:"仕事が終わりました。", em:"일이 끝났습니다."},
-  {k:"電車", r:"でんしゃ", ro:"densha", m:"전철", p:"명사", l:"N5", e:"電車で学校に行きます。", em:"전철로 학교에 갑니다."},
-  {k:"車", r:"くるま", ro:"kuruma", m:"자동차", p:"명사", l:"N5", e:"新しい車を買いました。", em:"새 자동차를 샀습니다."},
-  {k:"自転車", r:"じてんしゃ", ro:"jitensha", m:"자전거", p:"명사", l:"N5", e:"自転車で公園に行きます。", em:"자전거로 공원에 갑니다."},
-  {k:"道", r:"みち", ro:"michi", m:"길", p:"명사", l:"N5", e:"この道をまっすぐ行ってください。", em:"이 길을 곧장 가세요."},
-  {k:"駅", r:"えき", ro:"eki", m:"역", p:"명사", l:"N5", e:"駅で友達を待ちます。", em:"역에서 친구를 기다립니다."},
-  {k:"店", r:"みせ", ro:"mise", m:"가게", p:"명사", l:"N5", e:"あの店のパンはおいしいです。", em:"저 가게의 빵은 맛있습니다."},
-  {k:"食べ物", r:"たべもの", ro:"tabemono", m:"음식", p:"명사", l:"N5", e:"好きな食べ物は何ですか。", em:"좋아하는 음식은 무엇입니까?"},
-  {k:"飲み物", r:"のみもの", ro:"nomimono", m:"음료", p:"명사", l:"N5", e:"何か飲み物はいかがですか。", em:"뭔가 음료는 어떠세요?"},
-  {k:"料理", r:"りょうり", ro:"ryōri", m:"요리", p:"명사", l:"N5", e:"母は料理が上手です。", em:"어머니는 요리를 잘합니다."},
-  {k:"果物", r:"くだもの", ro:"kudamono", m:"과일", p:"명사", l:"N5", e:"果物をたくさん買いました。", em:"과일을 많이 샀습니다."},
-  {k:"野菜", r:"やさい", ro:"yasai", m:"채소", p:"명사", l:"N5", e:"野菜をよく食べます。", em:"채소를 자주 먹습니다."},
-  {k:"肉", r:"にく", ro:"niku", m:"고기", p:"명사", l:"N5", e:"焼き肉が大好きです。", em:"불고기를 아주 좋아합니다."},
-  {k:"卵", r:"たまご", ro:"tamago", m:"계란", p:"명사", l:"N5", e:"卵を二つ買いました。", em:"계란을 두 개 샀습니다."},
-  {k:"米", r:"こめ", ro:"kome", m:"쌀", p:"명사", l:"N5", e:"日本の米はおいしいです。", em:"일본 쌀은 맛있습니다."},
-  {k:"お茶", r:"おちゃ", ro:"ocha", m:"차", p:"명사", l:"N5", e:"お茶を一杯どうぞ。", em:"차 한 잔 드세요."},
-  {k:"牛乳", r:"ぎゅうにゅう", ro:"gyūnyū", m:"우유", p:"명사", l:"N5", e:"毎朝牛乳を飲みます。", em:"매일 아침 우유를 마십니다."},
-  {k:"本", r:"ほん", ro:"hon", m:"책", p:"명사", l:"N5", e:"図書館で本を借ります。", em:"도서관에서 책을 빌립니다."},
-  {k:"新聞", r:"しんぶん", ro:"shinbun", m:"신문", p:"명사", l:"N5", e:"父は毎朝新聞を読みます。", em:"아버지는 매일 아침 신문을 읽습니다."},
-  {k:"手紙", r:"てがみ", ro:"tegami", m:"편지", p:"명사", l:"N5", e:"友達に手紙を書きました。", em:"친구에게 편지를 썼습니다."},
-  {k:"音楽", r:"おんがく", ro:"ongaku", m:"음악", p:"명사", l:"N5", e:"音楽を聞きながら勉強します。", em:"음악을 들으면서 공부합니다."},
-  {k:"映画", r:"えいが", ro:"eiga", m:"영화", p:"명사", l:"N5", e:"週末に映画を見ます。", em:"주말에 영화를 봅니다."},
-  {k:"写真", r:"しゃしん", ro:"shashin", m:"사진", p:"명사", l:"N5", e:"旅行の写真を撮りました。", em:"여행 사진을 찍었습니다."},
-  {k:"絵", r:"え", ro:"e", m:"그림", p:"명사", l:"N5", e:"公園で絵を描きます。", em:"공원에서 그림을 그립니다."},
-  {k:"歌", r:"うた", ro:"uta", m:"노래", p:"명사", l:"N5", e:"カラオケで歌を歌います。", em:"노래방에서 노래를 부릅니다."},
-  {k:"時間", r:"じかん", ro:"jikan", m:"시간", p:"명사", l:"N5", e:"時間がありません。", em:"시간이 없습니다."},
-  {k:"約束", r:"やくそく", ro:"yakusoku", m:"약속", p:"명사", l:"N4", e:"友達と約束をしました。", em:"친구와 약속을 했습니다."},
-  {k:"気持ち", r:"きもち", ro:"kimochi", m:"기분, 마음", p:"명사", l:"N4", e:"今日はいい気持ちです。", em:"오늘은 기분이 좋습니다."},
-  {k:"元気", r:"げんき", ro:"genki", m:"건강한, 활기찬", p:"な형용사", l:"N5", e:"祖母はとても元気です。", em:"할머니는 매우 건강하십니다."},
-  {k:"楽しい", r:"たのしい", ro:"tanoshii", m:"즐겁다", p:"い형용사", l:"N5", e:"旅行はとても楽しかったです。", em:"여행은 매우 즐거웠습니다."},
-  {k:"嬉しい", r:"うれしい", ro:"ureshii", m:"기쁘다", p:"い형용사", l:"N4", e:"合格して嬉しいです。", em:"합격해서 기쁩니다."},
-  {k:"悲しい", r:"かなしい", ro:"kanashii", m:"슬프다", p:"い형용사", l:"N4", e:"別れは悲しいです。", em:"이별은 슬픕니다."},
-  {k:"忙しい", r:"いそがしい", ro:"isogashii", m:"바쁘다", p:"い형용사", l:"N5", e:"今週はとても忙しいです。", em:"이번 주는 매우 바쁩니다."},
-  {k:"大切", r:"たいせつ", ro:"taisetsu", m:"소중한", p:"な형용사", l:"N4", e:"家族はとても大切です。", em:"가족은 매우 소중합니다."},
-  {k:"便利", r:"べんり", ro:"benri", m:"편리한", p:"な형용사", l:"N4", e:"このアプリはとても便利です。", em:"이 앱은 매우 편리합니다."},
-  {k:"簡単", r:"かんたん", ro:"kantan", m:"간단한", p:"な형용사", l:"N4", e:"この問題は簡単です。", em:"이 문제는 간단합니다."},
-  {k:"難しい", r:"むずかしい", ro:"muzukashii", m:"어렵다", p:"い형용사", l:"N5", e:"日本語の漢字は難しいです。", em:"일본어 한자는 어렵습니다."},
-  {k:"頑張る", r:"がんばる", ro:"ganbaru", m:"힘내다, 노력하다", p:"동사", l:"N4", e:"明日のテスト、頑張ります。", em:"내일 시험, 힘내겠습니다."},
-  {k:"勉強する", r:"べんきょうする", ro:"benkyō suru", m:"공부하다", p:"동사", l:"N5", e:"毎日日本語を勉強します。", em:"매일 일본어를 공부합니다."},
-  {k:"働く", r:"はたらく", ro:"hataraku", m:"일하다", p:"동사", l:"N4", e:"父は銀行で働いています。", em:"아버지는 은행에서 일하고 있습니다."},
-  {k:"休む", r:"やすむ", ro:"yasumu", m:"쉬다", p:"동사", l:"N5", e:"今日は家で休みます。", em:"오늘은 집에서 쉽니다."},
-  {k:"話す", r:"はなす", ro:"hanasu", m:"이야기하다", p:"동사", l:"N5", e:"先生と日本語で話します。", em:"선생님과 일본어로 이야기합니다."},
-  {k:"聞く", r:"きく", ro:"kiku", m:"듣다, 묻다", p:"동사", l:"N5", e:"音楽を聞くのが好きです。", em:"음악 듣는 것을 좋아합니다."},
-  {k:"見る", r:"みる", ro:"miru", m:"보다", p:"동사", l:"N5", e:"テレビを見ます。", em:"텔레비전을 봅니다."},
-  {k:"食べる", r:"たべる", ro:"taberu", m:"먹다", p:"동사", l:"N5", e:"朝ご飯を食べます。", em:"아침밥을 먹습니다."},
-  {k:"飲む", r:"のむ", ro:"nomu", m:"마시다", p:"동사", l:"N5", e:"水をたくさん飲みます。", em:"물을 많이 마십니다."},
-  {k:"買う", r:"かう", ro:"kau", m:"사다", p:"동사", l:"N5", e:"新しい靴を買いました。", em:"새 신발을 샀습니다."},
-  {k:"売る", r:"うる", ro:"uru", m:"팔다", p:"동사", l:"N4", e:"この店では野菜を売っています。", em:"이 가게에서는 채소를 팔고 있습니다."},
-  {k:"行く", r:"いく", ro:"iku", m:"가다", p:"동사", l:"N5", e:"学校に行きます。", em:"학교에 갑니다."},
-  {k:"来る", r:"くる", ro:"kuru", m:"오다", p:"동사", l:"N5", e:"友達が家に来ます。", em:"친구가 집에 옵니다."},
-  {k:"帰る", r:"かえる", ro:"kaeru", m:"돌아가다", p:"동사", l:"N5", e:"六時に家に帰ります。", em:"6시에 집에 돌아갑니다."},
-  {k:"会う", r:"あう", ro:"au", m:"만나다", p:"동사", l:"N5", e:"駅で友達に会います。", em:"역에서 친구를 만납니다."},
-  {k:"待つ", r:"まつ", ro:"matsu", m:"기다리다", p:"동사", l:"N5", e:"バス停でバスを待ちます。", em:"버스 정류장에서 버스를 기다립니다."},
-  {k:"使う", r:"つかう", ro:"tsukau", m:"사용하다", p:"동사", l:"N5", e:"辞書を使って勉強します。", em:"사전을 사용해서 공부합니다."},
-  {k:"作る", r:"つくる", ro:"tsukuru", m:"만들다", p:"동사", l:"N5", e:"晩ご飯を作ります。", em:"저녁밥을 만듭니다."},
-  {k:"始める", r:"はじめる", ro:"hajimeru", m:"시작하다", p:"동사", l:"N5", e:"新しい仕事を始めました。", em:"새 일을 시작했습니다."},
-  {k:"終わる", r:"おわる", ro:"owaru", m:"끝나다", p:"동사", l:"N5", e:"授業は三時に終わります。", em:"수업은 3시에 끝납니다."}
-];
-CURATED.forEach(w => w.lang = 'ko');
+/* ---------- 히라가나/가타카나 → 로마자 변환 ---------- */
+const KANA_MAP = {
+  'きゃ':'kya','きゅ':'kyu','きょ':'kyo','しゃ':'sha','しゅ':'shu','しょ':'sho',
+  'ちゃ':'cha','ちゅ':'chu','ちょ':'cho','にゃ':'nya','にゅ':'nyu','にょ':'nyo',
+  'ひゃ':'hya','ひゅ':'hyu','ひょ':'hyo','みゃ':'mya','みゅ':'myu','みょ':'myo',
+  'りゃ':'rya','りゅ':'ryu','りょ':'ryo','ぎゃ':'gya','ぎゅ':'gyu','ぎょ':'gyo',
+  'じゃ':'ja','じゅ':'ju','じょ':'jo','びゃ':'bya','びゅ':'byu','びょ':'byo',
+  'ぴゃ':'pya','ぴゅ':'pyu','ぴょ':'pyo',
+  'あ':'a','い':'i','う':'u','え':'e','お':'o',
+  'か':'ka','き':'ki','く':'ku','け':'ke','こ':'ko',
+  'さ':'sa','し':'shi','す':'su','せ':'se','そ':'so',
+  'た':'ta','ち':'chi','つ':'tsu','て':'te','と':'to',
+  'な':'na','に':'ni','ぬ':'nu','ね':'ne','の':'no',
+  'は':'ha','ひ':'hi','ふ':'fu','へ':'he','ほ':'ho',
+  'ま':'ma','み':'mi','む':'mu','め':'me','も':'mo',
+  'や':'ya','ゆ':'yu','よ':'yo',
+  'ら':'ra','り':'ri','る':'ru','れ':'re','ろ':'ro',
+  'わ':'wa','を':'o','ん':'n',
+  'が':'ga','ぎ':'gi','ぐ':'gu','げ':'ge','ご':'go',
+  'ざ':'za','じ':'ji','ず':'zu','ぜ':'ze','ぞ':'zo',
+  'だ':'da','ぢ':'ji','づ':'zu','で':'de','ど':'do',
+  'ば':'ba','び':'bi','ぶ':'bu','べ':'be','ぼ':'bo',
+  'ぱ':'pa','ぴ':'pi','ぷ':'pu','ぺ':'pe','ぽ':'po',
+  'ゔ':'vu'
+};
+function kanaToRomaji(input){
+  if(!input) return '';
+  const s = input.replace(/[\u30a1-\u30f6]/g, ch => String.fromCharCode(ch.charCodeAt(0) - 0x60));
+  let out = '', i = 0;
+  while(i < s.length){
+    const two = s.substr(i,2);
+    if(KANA_MAP[two]){ out += KANA_MAP[two]; i += 2; continue; }
+    const one = s[i];
+    if(one === 'っ'){
+      const nextTwo = s.substr(i+1,2), next = s[i+1];
+      const nr = KANA_MAP[nextTwo] || KANA_MAP[next] || '';
+      if(nr) out += nr[0];
+      i += 1; continue;
+    }
+    if(one === 'ー'){ out += out.slice(-1); i += 1; continue; }
+    if(KANA_MAP[one]){ out += KANA_MAP[one]; i += 1; continue; }
+    out += one; i += 1;
+  }
+  return out;
+}
 
-/* ---------- 확장 데이터: 공개 JLPT 데이터셋을 API처럼 fetch (raw.githubusercontent.com은 CORS 허용) ---------- */
+/* ---------- 기본 내장 단어 (한국어 + 영어 뜻 포함) ---------- */
+const CURATED = [
+  {k:"水",r:"みず",m:"물",en:"water",p:"명사",l:"N5",e:"水を飲みます。",em:"물을 마십니다."},
+  {k:"火",r:"ひ",m:"불",en:"fire",p:"명사",l:"N5",e:"火に気をつけてください。",em:"불을 조심하세요."},
+  {k:"山",r:"やま",m:"산",en:"mountain",p:"명사",l:"N5",e:"週末に山に登ります。",em:"주말에 산에 오릅니다."},
+  {k:"川",r:"かわ",m:"강",en:"river",p:"명사",l:"N5",e:"川で魚を釣りました。",em:"강에서 물고기를 잡았습니다."},
+  {k:"空",r:"そら",m:"하늘",en:"sky",p:"명사",l:"N5",e:"今日は空がきれいです。",em:"오늘은 하늘이 예쁩니다."},
+  {k:"海",r:"うみ",m:"바다",en:"sea",p:"명사",l:"N5",e:"夏は海に行きたいです。",em:"여름에는 바다에 가고 싶습니다."},
+  {k:"花",r:"はな",m:"꽃",en:"flower",p:"명사",l:"N5",e:"庭に花を植えました。",em:"정원에 꽃을 심었습니다."},
+  {k:"木",r:"き",m:"나무",en:"tree",p:"명사",l:"N5",e:"公園に大きい木があります。",em:"공원에 큰 나무가 있습니다."},
+  {k:"犬",r:"いぬ",m:"개",en:"dog",p:"명사",l:"N5",e:"私の犬は白いです。",em:"제 개는 하얗습니다."},
+  {k:"猫",r:"ねこ",m:"고양이",en:"cat",p:"명사",l:"N5",e:"猫が窓の下で寝ています。",em:"고양이가 창가에서 자고 있습니다."},
+  {k:"鳥",r:"とり",m:"새",en:"bird",p:"명사",l:"N5",e:"朝、鳥の声が聞こえます。",em:"아침에 새 소리가 들립니다."},
+  {k:"魚",r:"さかな",m:"물고기",en:"fish",p:"명사",l:"N5",e:"夕食に魚を食べました。",em:"저녁으로 생선을 먹었습니다."},
+  {k:"雨",r:"あめ",m:"비",en:"rain",p:"명사",l:"N5",e:"明日は雨が降るそうです。",em:"내일은 비가 온다고 합니다."},
+  {k:"雪",r:"ゆき",m:"눈",en:"snow",p:"명사",l:"N5",e:"今年は雪がたくさん降りました。",em:"올해는 눈이 많이 내렸습니다."},
+  {k:"風",r:"かぜ",m:"바람",en:"wind",p:"명사",l:"N5",e:"今日は風が強いです。",em:"오늘은 바람이 강합니다."},
+  {k:"朝",r:"あさ",m:"아침",en:"morning",p:"명사",l:"N5",e:"毎朝六時に起きます。",em:"매일 아침 6시에 일어납니다."},
+  {k:"昼",r:"ひる",m:"낮",en:"noon, daytime",p:"명사",l:"N5",e:"昼に友達と会います。",em:"낮에 친구와 만납니다."},
+  {k:"夜",r:"よる",m:"밤",en:"night",p:"명사",l:"N5",e:"夜は静かに勉強します。",em:"밤에는 조용히 공부합니다."},
+  {k:"今日",r:"きょう",m:"오늘",en:"today",p:"명사",l:"N5",e:"今日はいい天気です。",em:"오늘은 날씨가 좋습니다."},
+  {k:"明日",r:"あした",m:"내일",en:"tomorrow",p:"명사",l:"N5",e:"明日、テストがあります。",em:"내일 시험이 있습니다."},
+  {k:"昨日",r:"きのう",m:"어제",en:"yesterday",p:"명사",l:"N5",e:"昨日は忙しかったです。",em:"어제는 바빴습니다."},
+  {k:"友達",r:"ともだち",m:"친구",en:"friend",p:"명사",l:"N5",e:"友達と映画を見ました。",em:"친구와 영화를 봤습니다."},
+  {k:"家族",r:"かぞく",m:"가족",en:"family",p:"명사",l:"N5",e:"家族と旅行に行きます。",em:"가족과 여행을 갑니다."},
+  {k:"先生",r:"せんせい",m:"선생님",en:"teacher",p:"명사",l:"N5",e:"先生に質問しました。",em:"선생님께 질문했습니다."},
+  {k:"学生",r:"がくせい",m:"학생",en:"student",p:"명사",l:"N5",e:"私は大学の学生です。",em:"저는 대학교 학생입니다."},
+  {k:"会社",r:"かいしゃ",m:"회사",en:"company",p:"명사",l:"N5",e:"毎日会社に行きます。",em:"매일 회사에 갑니다."},
+  {k:"仕事",r:"しごと",m:"일, 직업",en:"job, work",p:"명사",l:"N5",e:"仕事が終わりました。",em:"일이 끝났습니다."},
+  {k:"電車",r:"でんしゃ",m:"전철",en:"train",p:"명사",l:"N5",e:"電車で学校に行きます。",em:"전철로 학교에 갑니다."},
+  {k:"車",r:"くるま",m:"자동차",en:"car",p:"명사",l:"N5",e:"新しい車を買いました。",em:"새 자동차를 샀습니다."},
+  {k:"自転車",r:"じてんしゃ",m:"자전거",en:"bicycle",p:"명사",l:"N5",e:"自転車で公園に行きます。",em:"자전거로 공원에 갑니다."},
+  {k:"道",r:"みち",m:"길",en:"road",p:"명사",l:"N5",e:"この道をまっすぐ行ってください。",em:"이 길을 곧장 가세요."},
+  {k:"駅",r:"えき",m:"역",en:"station",p:"명사",l:"N5",e:"駅で友達を待ちます。",em:"역에서 친구를 기다립니다."},
+  {k:"店",r:"みせ",m:"가게",en:"shop",p:"명사",l:"N5",e:"あの店のパンはおいしいです。",em:"저 가게의 빵은 맛있습니다."},
+  {k:"食べ物",r:"たべもの",m:"음식",en:"food",p:"명사",l:"N5",e:"好きな食べ物は何ですか。",em:"좋아하는 음식은 무엇입니까?"},
+  {k:"飲み物",r:"のみもの",m:"음료",en:"drink",p:"명사",l:"N5",e:"何か飲み物はいかがですか。",em:"뭔가 음료는 어떠세요?"},
+  {k:"料理",r:"りょうり",m:"요리",en:"cooking",p:"명사",l:"N5",e:"母は料理が上手です。",em:"어머니는 요리를 잘합니다."},
+  {k:"果物",r:"くだもの",m:"과일",en:"fruit",p:"명사",l:"N5",e:"果物をたくさん買いました。",em:"과일을 많이 샀습니다."},
+  {k:"野菜",r:"やさい",m:"채소",en:"vegetable",p:"명사",l:"N5",e:"野菜をよく食べます。",em:"채소를 자주 먹습니다."},
+  {k:"肉",r:"にく",m:"고기",en:"meat",p:"명사",l:"N5",e:"焼き肉が大好きです。",em:"불고기를 아주 좋아합니다."},
+  {k:"卵",r:"たまご",m:"계란",en:"egg",p:"명사",l:"N5",e:"卵を二つ買いました。",em:"계란을 두 개 샀습니다."},
+  {k:"米",r:"こめ",m:"쌀",en:"rice",p:"명사",l:"N5",e:"日本の米はおいしいです。",em:"일본 쌀은 맛있습니다."},
+  {k:"お茶",r:"おちゃ",m:"차",en:"tea",p:"명사",l:"N5",e:"お茶を一杯どうぞ。",em:"차 한 잔 드세요."},
+  {k:"牛乳",r:"ぎゅうにゅう",m:"우유",en:"milk",p:"명사",l:"N5",e:"毎朝牛乳を飲みます。",em:"매일 아침 우유를 마십니다."},
+  {k:"本",r:"ほん",m:"책",en:"book",p:"명사",l:"N5",e:"図書館で本を借ります。",em:"도서관에서 책을 빌립니다."},
+  {k:"新聞",r:"しんぶん",m:"신문",en:"newspaper",p:"명사",l:"N5",e:"父は毎朝新聞を読みます。",em:"아버지는 매일 아침 신문을 읽습니다."},
+  {k:"手紙",r:"てがみ",m:"편지",en:"letter",p:"명사",l:"N5",e:"友達に手紙を書きました。",em:"친구에게 편지를 썼습니다."},
+  {k:"音楽",r:"おんがく",m:"음악",en:"music",p:"명사",l:"N5",e:"音楽を聞きながら勉強します。",em:"음악을 들으면서 공부합니다."},
+  {k:"映画",r:"えいが",m:"영화",en:"movie",p:"명사",l:"N5",e:"週末に映画を見ます。",em:"주말에 영화를 봅니다."},
+  {k:"写真",r:"しゃしん",m:"사진",en:"photo",p:"명사",l:"N5",e:"旅行の写真を撮りました。",em:"여행 사진을 찍었습니다."},
+  {k:"絵",r:"え",m:"그림",en:"picture",p:"명사",l:"N5",e:"公園で絵を描きます。",em:"공원에서 그림을 그립니다."},
+  {k:"歌",r:"うた",m:"노래",en:"song",p:"명사",l:"N5",e:"カラオケで歌を歌います。",em:"노래방에서 노래를 부릅니다."},
+  {k:"時間",r:"じかん",m:"시간",en:"time",p:"명사",l:"N5",e:"時間がありません。",em:"시간이 없습니다."},
+  {k:"約束",r:"やくそく",m:"약속",en:"promise",p:"명사",l:"N4",e:"友達と約束をしました。",em:"친구와 약속을 했습니다."},
+  {k:"気持ち",r:"きもち",m:"기분, 마음",en:"feeling",p:"명사",l:"N4",e:"今日はいい気持ちです。",em:"오늘은 기분이 좋습니다."},
+  {k:"元気",r:"げんき",m:"건강한, 활기찬",en:"energetic, well",p:"な형용사",l:"N5",e:"祖母はとても元気です。",em:"할머니는 매우 건강하십니다."},
+  {k:"楽しい",r:"たのしい",m:"즐겁다",en:"fun, enjoyable",p:"い형용사",l:"N5",e:"旅行はとても楽しかったです。",em:"여행은 매우 즐거웠습니다."},
+  {k:"嬉しい",r:"うれしい",m:"기쁘다",en:"happy, glad",p:"い형용사",l:"N4",e:"合格して嬉しいです。",em:"합격해서 기쁩니다."},
+  {k:"悲しい",r:"かなしい",m:"슬프다",en:"sad",p:"い형용사",l:"N4",e:"別れは悲しいです。",em:"이별은 슬픕니다."},
+  {k:"忙しい",r:"いそがしい",m:"바쁘다",en:"busy",p:"い형용사",l:"N5",e:"今週はとても忙しいです。",em:"이번 주는 매우 바쁩니다."},
+  {k:"大切",r:"たいせつ",m:"소중한",en:"important",p:"な형용사",l:"N4",e:"家族はとても大切です。",em:"가족은 매우 소중합니다."},
+  {k:"便利",r:"べんり",m:"편리한",en:"convenient",p:"な형용사",l:"N4",e:"このアプリはとても便利です。",em:"이 앱은 매우 편리합니다."},
+  {k:"簡単",r:"かんたん",m:"간단한",en:"easy, simple",p:"な형용사",l:"N4",e:"この問題は簡単です。",em:"이 문제는 간단합니다."},
+  {k:"難しい",r:"むずかしい",m:"어렵다",en:"difficult",p:"い형용사",l:"N5",e:"日本語の漢字は難しいです。",em:"일본어 한자는 어렵습니다."},
+  {k:"頑張る",r:"がんばる",m:"힘내다, 노력하다",en:"to do one's best",p:"동사",l:"N4",e:"明日のテスト、頑張ります。",em:"내일 시험, 힘내겠습니다."},
+  {k:"勉強する",r:"べんきょうする",m:"공부하다",en:"to study",p:"동사",l:"N5",e:"毎日日本語を勉強します。",em:"매일 일본어를 공부합니다."},
+  {k:"働く",r:"はたらく",m:"일하다",en:"to work",p:"동사",l:"N4",e:"父は銀行で働いています。",em:"아버지는 은행에서 일하고 있습니다."},
+  {k:"休む",r:"やすむ",m:"쉬다",en:"to rest",p:"동사",l:"N5",e:"今日は家で休みます。",em:"오늘은 집에서 쉽니다."},
+  {k:"話す",r:"はなす",m:"이야기하다",en:"to speak",p:"동사",l:"N5",e:"先生と日本語で話します。",em:"선생님과 일본어로 이야기합니다."},
+  {k:"聞く",r:"きく",m:"듣다, 묻다",en:"to listen, to ask",p:"동사",l:"N5",e:"音楽を聞くのが好きです。",em:"음악 듣는 것을 좋아합니다."},
+  {k:"見る",r:"みる",m:"보다",en:"to see, to watch",p:"동사",l:"N5",e:"テレビを見ます。",em:"텔레비전을 봅니다."},
+  {k:"食べる",r:"たべる",m:"먹다",en:"to eat",p:"동사",l:"N5",e:"朝ご飯を食べます。",em:"아침밥을 먹습니다."},
+  {k:"飲む",r:"のむ",m:"마시다",en:"to drink",p:"동사",l:"N5",e:"水をたくさん飲みます。",em:"물을 많이 마십니다."},
+  {k:"買う",r:"かう",m:"사다",en:"to buy",p:"동사",l:"N5",e:"新しい靴を買いました。",em:"새 신발을 샀습니다."},
+  {k:"売る",r:"うる",m:"팔다",en:"to sell",p:"동사",l:"N4",e:"この店では野菜を売っています。",em:"이 가게에서는 채소를 팔고 있습니다."},
+  {k:"行く",r:"いく",m:"가다",en:"to go",p:"동사",l:"N5",e:"学校に行きます。",em:"학교에 갑니다."},
+  {k:"来る",r:"くる",m:"오다",en:"to come",p:"동사",l:"N5",e:"友達が家に来ます。",em:"친구가 집에 옵니다."},
+  {k:"帰る",r:"かえる",m:"돌아가다",en:"to return home",p:"동사",l:"N5",e:"六時に家に帰ります。",em:"6시에 집에 돌아갑니다."},
+  {k:"会う",r:"あう",m:"만나다",en:"to meet",p:"동사",l:"N5",e:"駅で友達に会います。",em:"역에서 친구를 만납니다."},
+  {k:"待つ",r:"まつ",m:"기다리다",en:"to wait",p:"동사",l:"N5",e:"バス停でバスを待ちます。",em:"버스 정류장에서 버스를 기다립니다."},
+  {k:"使う",r:"つかう",m:"사용하다",en:"to use",p:"동사",l:"N5",e:"辞書を使って勉強します。",em:"사전을 사용해서 공부합니다."},
+  {k:"作る",r:"つくる",m:"만들다",en:"to make",p:"동사",l:"N5",e:"晩ご飯を作ります。",em:"저녁밥을 만듭니다."},
+  {k:"始める",r:"はじめる",m:"시작하다",en:"to begin",p:"동사",l:"N5",e:"新しい仕事を始めました。",em:"새 일을 시작했습니다."},
+  {k:"終わる",r:"おわる",m:"끝나다",en:"to end",p:"동사",l:"N5",e:"授業は三時に終わります。",em:"수업은 3시에 끝납니다."}
+];
+CURATED.forEach(w => { w.lang = 'ko'; w.ro = kanaToRomaji(w.r); });
+
+/* ---------- 확장 데이터: 공개 JLPT 데이터셋 fetch ---------- */
 const LEVELS = ['N5','N4','N3','N2','N1'];
 const CSV_URL = lv => `https://raw.githubusercontent.com/jamsinclair/open-anki-jlpt-decks/main/src/${lv.toLowerCase()}.csv`;
 
@@ -332,11 +374,8 @@ function parseCSVLine(line){
     if(c === '"'){
       if(inQuotes && line[i+1] === '"'){ cur += '"'; i++; }
       else inQuotes = !inQuotes;
-    } else if(c === ',' && !inQuotes){
-      out.push(cur); cur = '';
-    } else {
-      cur += c;
-    }
+    } else if(c === ',' && !inQuotes){ out.push(cur); cur = ''; }
+    else cur += c;
   }
   out.push(cur);
   return out;
@@ -352,25 +391,58 @@ async function fetchLevel(lv){
     const cols = parseCSVLine(line);
     const k = (cols[0] || '').trim();
     const r = (cols[1] || '').trim();
-    const m = (cols[2] || '').trim();
-    if(!k || !r || !m) return null;
+    const en = (cols[2] || '').trim();
+    if(!k || !r || !en) return null;
     if(curatedSet.has(k)) return null;
-    return { k, r, ro:'', m, p:'', l: lv, lang:'en' };
+    return { k, r, ro: kanaToRomaji(r), m:null, en, p:'', l: lv, lang:'en' };
   }).filter(Boolean);
 }
 
 let selectedLevels = new Set(['N5','N4']);
 let levelCache = {};
 let pool = [];
+let todayWords = [];
+let currentPointer = 0;
+const translationMemCache = {};
 
-function dayOfYear(d){ const start = new Date(d.getFullYear(), 0, 0); return Math.floor((d - start) / 86400000); }
-function dateKey(d){
+async function translateToKorean(word){
+  if(word.m) return word.m;
+  const text = word.en;
+  if(!text) return null;
+  if(translationMemCache[text]){ word.m = translationMemCache[text]; return word.m; }
+  const cacheKey = 'ko-tr:' + text;
+  try{
+    const cached = await storageAPI.get(cacheKey);
+    if(cached && cached.value){ translationMemCache[text] = cached.value; word.m = cached.value; return word.m; }
+  }catch(e){}
+  try{
+    const res = await fetch(`https://api.mymemory.translated.net/get?q=${encodeURIComponent(text)}&langpair=en|ko`);
+    const data = await res.json();
+    const translated = data && data.responseData && data.responseData.translatedText;
+    if(translated){
+      translationMemCache[text] = translated;
+      word.m = translated;
+      try{ await storageAPI.set(cacheKey, translated); }catch(e){}
+      return translated;
+    }
+  }catch(e){}
+  return null;
+}
+
+/* ---------- 날짜 / 풀 계산 ---------- */
+const EPOCH = new Date(2025,0,1);
+function dayIndex(d){
+  const dd = new Date(d.getFullYear(), d.getMonth(), d.getDate());
+  return Math.max(0, Math.floor((dd - EPOCH) / 86400000));
+}
+function dateKeyOf(d){
   const y = d.getFullYear(), m = String(d.getMonth()+1).padStart(2,'0'), day = String(d.getDate()).padStart(2,'0');
   return `${y}-${m}-${day}`;
 }
 
 const today = new Date();
-const todayKey = dateKey(today);
+const todayKey = dateKeyOf(today);
+const todayDayIndex = dayIndex(today);
 document.getElementById('dateLabel').textContent =
   today.toLocaleDateString('ko-KR', { year:'numeric', month:'long', day:'numeric', weekday:'long' });
 
@@ -384,49 +456,85 @@ async function loadSelectedLevels(){
     catch(e){ anyFailed = true; levelCache[lv] = []; }
   }));
   pool = [...CURATED, ...[...selectedLevels].flatMap(lv => levelCache[lv] || [])];
-  document.getElementById('poolCount').textContent = `현재 ${pool.length.toLocaleString()}개 단어가 순환 중입니다.`;
+  document.getElementById('poolCount').textContent = `현재 ${pool.length.toLocaleString()}개 단어 풀에서 하루 3개씩 순환합니다.`;
   statusEl.textContent = anyFailed ? '일부 데이터를 불러오지 못해 기본 세트로 대체했어요.' : '';
-  renderToday();
+
+  computeTodayWords();
+  currentPointer = 0;
+  renderCurrentWord();
+  renderReview();
 }
 
-function renderToday(){
-  if(pool.length === 0) return;
-  const idx = dayOfYear(today) % pool.length;
-  const word = pool[idx];
+function wordsForDay(dIdx){
+  if(pool.length === 0) return [];
+  const base = dIdx * 3;
+  return [0,1,2].map(i => pool[(base + i) % pool.length]);
+}
+
+function computeTodayWords(){
+  todayWords = wordsForDay(todayDayIndex);
+}
+
+/* ---------- 오늘의 단어 카드 렌더링 ---------- */
+const card = document.getElementById('card');
+
+async function renderCurrentWord(){
+  const word = todayWords[currentPointer];
+  if(!word) return;
+  card.classList.remove('flipped');
 
   document.getElementById('wordMain').textContent = word.k;
   document.getElementById('romaji').textContent = word.ro || '';
   document.getElementById('kana').textContent = word.r;
-  document.getElementById('meaning').textContent = word.m;
+  document.getElementById('kanaRomaji').textContent = word.ro ? `[${word.ro}]` : '';
   document.getElementById('levelTag').textContent = word.l;
+  document.getElementById('navLabel').textContent = `${currentPointer+1} / ${todayWords.length}`;
 
   const posEl = document.getElementById('posPillFront');
   if(word.p){
     posEl.style.display = '';
     posEl.textContent = word.p;
     posEl.className = 'pos-pill' + (word.p === '동사' ? ' verb' : (word.p.includes('형용사') ? ' adj' : ''));
+  } else posEl.style.display = 'none';
+
+  const meaningKoEl = document.getElementById('meaningKo');
+  const meaningEnEl = document.getElementById('meaningEn');
+  meaningEnEl.textContent = word.en || '';
+  if(word.lang === 'ko'){
+    meaningKoEl.textContent = word.m;
   } else {
-    posEl.style.display = 'none';
+    meaningKoEl.textContent = word.m || '번역 중...';
+    if(!word.m){
+      translateToKorean(word).then(ko => {
+        if(todayWords[currentPointer] === word) meaningKoEl.textContent = ko || word.en;
+      });
+    }
   }
 
   const exampleBox = document.getElementById('exampleBox');
-  const sourceNote = document.getElementById('sourceNote');
   if(word.lang === 'ko' && word.e){
     exampleBox.style.display = '';
     document.getElementById('exJp').textContent = word.e;
     document.getElementById('exKr').textContent = word.em;
-    sourceNote.style.display = 'none';
   } else {
     exampleBox.style.display = 'none';
-    sourceNote.style.display = '';
-    sourceNote.textContent = '공개 JLPT 단어 데이터셋에서 가져온 단어예요. 뜻은 영어 사전 기준입니다.';
   }
 }
 
-const card = document.getElementById('card');
 document.getElementById('flipBtn').addEventListener('click', () => card.classList.toggle('flipped'));
 card.addEventListener('click', () => card.classList.toggle('flipped'));
+document.getElementById('prevBtn').addEventListener('click', () => {
+  if(card.classList.contains('flipped')){ card.classList.remove('flipped'); return; }
+  currentPointer = (currentPointer - 1 + todayWords.length) % todayWords.length;
+  renderCurrentWord();
+});
+document.getElementById('nextBtn').addEventListener('click', () => {
+  if(card.classList.contains('flipped')){ card.classList.remove('flipped'); return; }
+  currentPointer = (currentPointer + 1) % todayWords.length;
+  renderCurrentWord();
+});
 
+/* ---------- 학습 체크 & 스트릭 ---------- */
 const checkBtn = document.getElementById('checkBtn');
 
 async function refreshCheckState(){
@@ -458,7 +566,7 @@ async function renderStreak(){
   for(let i=6;i>=0;i--){
     const d = new Date(today);
     d.setDate(d.getDate() - i);
-    const key = dateKey(d);
+    const key = dateKeyOf(d);
     let filled = false;
     try{ filled = !!(await storageAPI.get(`checkin:${key}`)); }catch(e){ filled = false; }
     if(filled) count++;
@@ -476,6 +584,7 @@ async function renderStreak(){
   document.getElementById('streakCount').textContent = `${count}일 완료`;
 }
 
+/* ---------- 급수 선택 칩 ---------- */
 async function loadLevelPref(){
   try{
     const res = await storageAPI.get('levels-pref');
@@ -483,7 +592,7 @@ async function loadLevelPref(){
       const arr = JSON.parse(res.value);
       if(Array.isArray(arr) && arr.length) selectedLevels = new Set(arr);
     }
-  }catch(e){ /* 기본값 유지 */ }
+  }catch(e){}
 }
 
 function renderChips(){
@@ -497,15 +606,91 @@ function renderChips(){
       if(selectedLevels.has(lv)){
         if(selectedLevels.size === 1) return;
         selectedLevels.delete(lv);
-      } else {
-        selectedLevels.add(lv);
-      }
+      } else selectedLevels.add(lv);
       renderChips();
       try{ await storageAPI.set('levels-pref', JSON.stringify([...selectedLevels])); }catch(e){}
       await loadSelectedLevels();
     });
     chipsEl.appendChild(chip);
   });
+}
+
+/* ---------- 탭 전환 ---------- */
+const tabToday = document.getElementById('tabToday');
+const tabReview = document.getElementById('tabReview');
+const todayView = document.getElementById('todayView');
+const reviewView = document.getElementById('reviewView');
+
+tabToday.addEventListener('click', () => {
+  tabToday.classList.add('active'); tabReview.classList.remove('active');
+  todayView.style.display = ''; reviewView.style.display = 'none';
+});
+tabReview.addEventListener('click', () => {
+  tabReview.classList.add('active'); tabToday.classList.remove('active');
+  todayView.style.display = 'none'; reviewView.style.display = '';
+  renderReview();
+});
+
+/* ---------- 복습 페이지 ---------- */
+const MAX_REVIEW = 240; // 최근 순으로 표시할 최대 단어 수 (성능 보호용)
+
+function buildMiniCard(word){
+  const wrap = document.createElement('div');
+  wrap.className = 'mini-card';
+  const inner = document.createElement('div');
+  inner.className = 'mini-inner';
+
+  const front = document.createElement('div');
+  front.className = 'mini-face';
+  front.innerHTML = `<span class="mini-tag">${word.l}</span><div class="mini-word">${word.k}</div>`;
+
+  const back = document.createElement('div');
+  back.className = 'mini-face mback';
+  const romajiPart = word.ro ? `<div class="mini-romaji">[${word.ro}]</div>` : '';
+  back.innerHTML = `
+    <div class="mini-kana">${word.r}</div>
+    ${romajiPart}
+    <div class="mini-meaning-ko">${word.m || '번역 중...'}</div>
+    <div class="mini-meaning-en">${word.en || ''}</div>
+  `;
+
+  inner.appendChild(front); inner.appendChild(back);
+  wrap.appendChild(inner);
+
+  wrap.addEventListener('click', async () => {
+    wrap.classList.toggle('flipped');
+    if(word.lang === 'en' && !word.m){
+      const koEl = back.querySelector('.mini-meaning-ko');
+      const ko = await translateToKorean(word);
+      koEl.textContent = ko || word.en;
+    }
+  });
+  return wrap;
+}
+
+function renderReview(){
+  const grid = document.getElementById('reviewGrid');
+  const countEl = document.getElementById('reviewCount');
+  grid.innerHTML = '';
+  if(pool.length === 0){ countEl.textContent=''; return; }
+
+  const seen = new Map(); // k -> word (최근 우선)
+  for(let d = todayDayIndex; d >= 0; d--){
+    const ws = wordsForDay(d);
+    for(const w of ws){
+      if(!seen.has(w.k)) seen.set(w.k, w);
+    }
+    if(seen.size >= MAX_REVIEW) break;
+  }
+
+  const list = [...seen.values()].slice(0, MAX_REVIEW);
+  countEl.textContent = `총 ${list.length.toLocaleString()}개`;
+
+  if(list.length === 0){
+    grid.innerHTML = '<div class="review-empty">아직 배운 단어가 없어요.</div>';
+    return;
+  }
+  list.forEach(w => grid.appendChild(buildMiniCard(w)));
 }
 
 (async function init(){
